@@ -15,8 +15,11 @@ $(O)/Main.o: $(O)/Game.o
 $(O)/Game.o: $(O)/Window.o $(O)/StateManager.o
 	$(CC) $(S)/Game.cpp -c -o $(O)/Game.o $(FLAGS)
 
-$(O)/StateManager.o:
+$(O)/StateManager.o: $(O)/StateMainMenu.o
 	$(CC) $(S)/StateManager.cpp -c -o $(O)/StateManager.o $(FLAGS)
+
+$(O)/StateMainMenu.o: $(O)/EventManager.o
+	$(CC) $(S)/StateMainMenu.cpp -c -o $(O)/StateMainMenu.o $(FLAGS)
 
 $(O)/Window.o: $(O)/EventManager.o
 	$(CC) $(S)/Window.cpp -c -o $(O)/Window.o $(FLAGS)

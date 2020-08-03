@@ -9,7 +9,7 @@
 #include <stdexcept>
 
 #include "SharedContext.h"
-#include "StateBase.h"
+#include "StateMainMenu.h"
 
 enum class StateName
 {
