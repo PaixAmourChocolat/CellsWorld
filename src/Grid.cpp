@@ -55,11 +55,19 @@ void Grid::update()
 {
 	for(std::size_t i = m_parity; i+1 < m_size; i += 2)
 	{
-		for(std::siez_t j = m_parity; j+1 < m_size; j += 2)
+		for(std::size_t j = m_parity; j+1 < m_size; j += 2)
 		{
-			m_rule({m_table[i][j], m_table[i+1][j], m_table[i][j+1], m_table[i+1][j+1]});
+			LineQuad subGrid {m_table[i][j], m_table[i+1][j], m_table[i][j+1], m_table[i+1][j+1]}; 
+			
+			m_rule(subGrid);
+			
+			m_table[i][j] = subGrid[0];
+			m_table[i+1][j] = subGrid[1];
+			m_table[i][j+1] = subGrid[2];
+			m_table[i+1][j+1] = subGrid[3];
 		}
 	}
+	// TODO handle toric behaviour
 	
 	toggleParity();
 }

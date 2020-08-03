@@ -21,8 +21,11 @@ class Grid // : public sf::Drawable
 		
 	public :
 		
-		Grid(std::size_t);
+		Grid(std::size_t); // TODO rectangles instead of squares ?
 		Grid(std::initializer_list<bool>, std::size_t = 2);
+		// TODO Grid(const std::string&); // read from file
+		
+		// TODO Rule alteration
 		
 		void update();
 		std::size_t size() const;

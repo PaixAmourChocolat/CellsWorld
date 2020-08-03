@@ -3,6 +3,7 @@
 
 #include "StateBase.h"
 #include "EventManager.h"
+#include "Grid.h"
 
 class StateMainMenu : public StateBase
 {
@@ -22,7 +23,10 @@ class StateMainMenu : public StateBase
 		
 	private:
 		
+		Grid m_grid;
 		
+		sf::Time m_updateTime;
+		sf::Time m_elapsedTime;
 };
 
 #endif // STATEMAINMENU_H

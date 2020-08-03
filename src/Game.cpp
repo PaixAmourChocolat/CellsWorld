@@ -9,7 +9,7 @@ Game::Game()
 	m_sharedContext.m_window = &m_window;
 	m_sharedContext.m_eventManager = m_window.getEventManager();
 	
-	//m_stateManager.switchTo(StateName::MainMenu);
+	m_stateManager.switchTo(StateName::MainMenu);
 }
 
 void Game::run()

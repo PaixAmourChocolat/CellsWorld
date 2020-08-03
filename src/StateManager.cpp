@@ -3,7 +3,7 @@
 StateManager::StateManager(SharedContext* sharedContext)
 : m_sharedContext (sharedContext)
 {
-	//registerState<StateMainMenu>(StateName::MainMenu);
+	registerState<StateMainMenu>(StateName::MainMenu);
 }
 
 void StateManager::update(sf::Time dt)
