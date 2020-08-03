@@ -22,11 +22,12 @@ class Grid // : public sf::Drawable
 	public :
 		
 		Grid(std::size_t); // TODO rectangles instead of squares ?
-		// TODO Grid(const std::string&); // read from file
 		
 		// TODO setRule
 		
 		// TODO Rule alteration
+		
+		void loadFromFile(const std::string&);
 		
 		void update();
 		std::size_t size() const;
@@ -42,7 +43,7 @@ class Grid // : public sf::Drawable
 		
 	private :
 		
-		const std::size_t m_size;
+		std::size_t m_size;
 		std::vector<std::vector<bool>> m_table;
 		Rule m_rule;
 		Parity m_parity;
