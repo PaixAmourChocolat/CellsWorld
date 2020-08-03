@@ -27,6 +27,8 @@ class Grid // : public sf::Drawable
 		
 		// TODO Rule alteration
 		
+		void loadFromFile(const std::string&);
+		
 		void update();
 		std::size_t size() const;
 		
@@ -39,7 +41,7 @@ class Grid // : public sf::Drawable
 		
 	private :
 		
-		const std::size_t m_size;
+		std::size_t m_size;
 		std::vector<std::vector<bool>> m_table;
 		Rule m_rule;
 		Parity m_parity;

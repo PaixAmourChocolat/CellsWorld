@@ -3,6 +3,8 @@
 
 #include <array>
 #include <map>
+#include <fstream>
+#include <string>
 
 using LineQuad = std::array<bool, 4>;
 
@@ -10,7 +12,10 @@ class Rule
 {
 	public :
 		
+		Rule() = default;
 		// TODO Rule(const std::string&); // read from file
+		
+		void loadFromFile(const std::string&);
 		
 		void operator()(LineQuad&);
 	

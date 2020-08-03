@@ -31,24 +31,40 @@ Grid::Grid(std::initializer_list<bool> il, std::size_t size)
 	}
 }
 
-std::size_t Grid::size() const
+void Grid::loadFromFile(const std::string& filename)
 {
-	return m_table.size();
-}
-
-void Grid::toggleState(std::size_t x, std::size_t y)
-{
-	if(x >= m_size || y >= m_size)
+	std::ifstream file (filename);
+	if (!file.is_open())
 	{
-		throw std::runtime_error("It's invalid : " + std::to_string(x) + " / " + std::to_string(y));
+		throw std::runtime_error ("Failed to load " + filename);
 	}
 	
-	m_table[x][y] = !m_table[x][y];
-}
-
-void Grid::toggleParity()
-{
-	m_parity = (m_parity == Even) ? Odd : Even;
+	std::string ruleFile;
+	std::getline(file, ruleFile);
+	m_rule.loadFromFile(ruleFile);
+	
+	std::string sizeStr;
+	std::getline(file, sizeStr);
+	m_size = static_cast<std::size_t>(std::stoi(sizeStr));
+	//resize(m_size);
+	
+	try
+	{
+		for (std::size_t j = 0; j < m_size; ++j)
+		{
+			std::string line;
+			std::getline(file, line);
+			
+			for (std::size_t i = 0; i < m_size; ++i)
+			{
+				m_table[i][j] = (line[i] == '1');
+			}
+		}
+	}
+	catch (std::exception& err)
+	{
+		throw std::runtime_error ("Corrupted file : " + filename);
+	}
 }
 
 void Grid::update()
@@ -70,6 +86,26 @@ void Grid::update()
 	// TODO handle toric behaviour
 	
 	toggleParity();
+}
+
+std::size_t Grid::size() const
+{
+	return m_table.size();
+}
+
+void Grid::toggleState(std::size_t x, std::size_t y)
+{
+	if(x >= m_size || y >= m_size)
+	{
+		throw std::runtime_error("It's invalid : " + std::to_string(x) + " / " + std::to_string(y));
+	}
+	
+	m_table[x][y] = !m_table[x][y];
+}
+
+void Grid::toggleParity()
+{
+	m_parity = (m_parity == Even) ? Odd : Even;
 }
 
 std::ostream& operator<<(std::ostream& os, const Grid& grid)
