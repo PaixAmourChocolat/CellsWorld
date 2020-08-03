@@ -95,6 +95,33 @@ void Grid::toggleParity()
 	m_parity = (m_parity == Even) ? Odd : Even;
 }
 
+void Grid::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+	sf::RectangleShape rectangle;
+	
+	for (std::size_t i = 0; i < m_size; ++i)
+	{
+		for (std::size_t j = 0; j < m_size; ++j)
+		{
+			rectangle.setSize({860.f/m_size, 640.f/m_size});
+			rectangle.setPosition(i*860.f/m_size, j*640.f/m_size);
+			rectangle.setOutlineColor(sf::Color::Blue);
+			rectangle.setOutlineThickness(-1.f);
+				
+			if (m_table[i][j])
+			{
+				rectangle.setFillColor(sf::Color::White);
+			}
+			else
+			{
+				rectangle.setFillColor(sf::Color::Black);
+			}
+			
+			target.draw(rectangle, states);
+		}
+	}
+}
+
 std::ostream& operator<<(std::ostream& os, const Grid& grid)
 {
 	for(std::size_t j = 0; j < grid.size(); ++j)
