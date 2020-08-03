@@ -10,6 +10,7 @@ class Rule
 {
 	public :
 		
+		Rule() = default;
 		// TODO Rule(const std::string&); // read from file
 		
 		void operator()(LineQuad&);

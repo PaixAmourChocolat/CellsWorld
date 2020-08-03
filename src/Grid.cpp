@@ -36,6 +36,16 @@ std::size_t Grid::size() const
 	return m_table.size();
 }
 
+void Grid::resize(std::size_t newSize)
+{
+	m_table.resize(newSize);
+	
+	for(auto& vect : m_table)
+	{
+		vect.resize(newSize, false);
+	}
+}
+
 void Grid::toggleState(std::size_t x, std::size_t y)
 {
 	if(x >= m_size || y >= m_size)
