@@ -13,7 +13,7 @@ StateMainMenu::~StateMainMenu()
 
 void StateMainMenu::create()
 { 
-	m_grid.loadFromFile("Assets/Grid/001");
+	m_grid.loadFromFile("Assets/Grid/Void30");
 }
 
 void StateMainMenu::destroy()
