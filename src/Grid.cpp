@@ -65,13 +65,13 @@ void Grid::update()
 	{
 		for(std::size_t j = m_parity; j+1 < m_size; j += 2)
 		{
-			LineQuad subGrid {m_table[i][j], m_table[i][j+1], m_table[i+1][j], m_table[i+1][j+1]}; 
+			LineQuad subGrid {m_table[i][j], m_table[i+1][j], m_table[i][j+1], m_table[i+1][j+1]}; 
 			
 			m_rule(subGrid);
 			
 			m_table[i][j] = subGrid[0];
-			m_table[i][j+1] = subGrid[1];
-			m_table[i+1][j] = subGrid[2];
+			m_table[i+1][j] = subGrid[1];
+			m_table[i][j+1] = subGrid[2];
 			m_table[i+1][j+1] = subGrid[3];
 		}
 	}
@@ -97,5 +97,47 @@ void Grid::toggleParity()
 
 void Grid::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+	sf::RectangleShape rectangle;
 	
+	for (std::size_t i = 0; i < m_size; ++i)
+	{
+		for (std::size_t j = 0; j < m_size; ++j)
+		{
+			rectangle.setSize({860.f/m_size, 640.f/m_size});
+			rectangle.setPosition(i*860.f/m_size, j*640.f/m_size);
+			rectangle.setOutlineColor(sf::Color::Blue);
+			rectangle.setOutlineThickness(-1.f);
+				
+			if (m_table[i][j])
+			{
+				rectangle.setFillColor(sf::Color::White);
+			}
+			else
+			{
+				rectangle.setFillColor(sf::Color::Black);
+			}
+			
+			target.draw(rectangle, states);
+		}
+	}
+	
+	sf::RectangleShape vert;
+	vert.setFillColor(sf::Color::Red);
+	vert.setSize({2.f, 640.f});
+	
+	sf::RectangleShape horiz;
+	horiz.setFillColor(sf::Color::Red);
+	horiz.setSize({860.f, 2.f});
+	
+	for(std::size_t i = m_parity; i < m_size; i += 2)
+	{
+		vert.setPosition(i*860.f/m_size + 1.f, 0);
+		target.draw(vert, states);
+	}
+	
+	for(std::size_t j = m_parity; j < m_size; j += 2)
+	{
+		horiz.setPosition(0, j*640.f/m_size + 1.f);
+		target.draw(horiz, states);
+	}
 }
