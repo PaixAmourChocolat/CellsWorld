@@ -12,7 +12,9 @@ StateMainMenu::~StateMainMenu()
 { }
 
 void StateMainMenu::create()
-{ }
+{ 
+	m_grid.loadFromFile("Assets/Grid/001");
+}
 
 void StateMainMenu::destroy()
 { }
@@ -31,10 +33,9 @@ void StateMainMenu::update(sf::Time dt)
 	{
 		m_elapsedTime -= m_updateTime;
 		m_grid.update();
+		std::cout << m_grid << std::endl;
 	}
 }
 
 void StateMainMenu::draw()
-{
-	std::cout << m_grid << std::endl;
-}
+{ }

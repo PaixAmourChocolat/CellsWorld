@@ -13,7 +13,6 @@ class Rule
 	public :
 		
 		Rule() = default;
-		// TODO Rule(const std::string&); // read from file
 		
 		void loadFromFile(const std::string&);
 		

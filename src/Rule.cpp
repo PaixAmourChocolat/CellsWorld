@@ -12,6 +12,8 @@ void Rule::operator()(LineQuad& input)
 
 void Rule::loadFromFile(const std::string& filename)
 {
+	m_graph.clear();
+	
 	std::ifstream file (filename);
 	if (!file.is_open())
 	{
@@ -44,5 +46,7 @@ void Rule::loadFromFile(const std::string& filename)
 		{
 			throw std::runtime_error ("Corrupted file : " + filename);
 		}
+		
+		m_graph[input] = output;
 	}
 }

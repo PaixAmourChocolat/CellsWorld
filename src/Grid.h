@@ -22,8 +22,8 @@ class Grid // : public sf::Drawable
 	public :
 		
 		Grid(std::size_t); // TODO rectangles instead of squares ?
-		Grid(std::initializer_list<bool>, std::size_t = 2);
-		// TODO Grid(const std::string&); // read from file
+		
+		// TODO setRule
 		
 		// TODO Rule alteration
 		
@@ -33,6 +33,8 @@ class Grid // : public sf::Drawable
 		std::size_t size() const;
 		
 	private :
+		
+		void resize(std::size_t);
 		
 		// virtual void draw(sf::RenderTarget&, sf::RenderStates) const;
 		

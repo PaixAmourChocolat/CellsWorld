@@ -6,33 +6,25 @@ Grid::Grid(std::size_t size)
 , m_parity(Even)
 { }
 
-Grid::Grid(std::initializer_list<bool> il, std::size_t size)
-: m_size(size)
-, m_parity(Even)
-{ 
-	if(size*size != il.size())
+std::size_t Grid::size() const
+{
+	return m_table.size();
+}
+
+void Grid::resize(std::size_t newSize)
+{
+	m_table.resize(newSize);
+	
+	for(auto& vect : m_table)
 	{
-		throw std::runtime_error("Size doesn't match with the grid constructor.");
-	}
-	
-	m_table.resize(size);
-	
-	std::size_t i = 0;
-	
-	for(bool it : il)
-	{
-		m_table[i].push_back(it);
-		++i;
-		
-		if(i >= size)
-		{
-			i = 0;
-		}
+		vect.resize(newSize, false);
 	}
 }
 
 void Grid::loadFromFile(const std::string& filename)
 {
+	m_table.clear();
+	
 	std::ifstream file (filename);
 	if (!file.is_open())
 	{
@@ -46,7 +38,7 @@ void Grid::loadFromFile(const std::string& filename)
 	std::string sizeStr;
 	std::getline(file, sizeStr);
 	m_size = static_cast<std::size_t>(std::stoi(sizeStr));
-	//resize(m_size);
+	resize(m_size);
 	
 	try
 	{
@@ -86,11 +78,6 @@ void Grid::update()
 	// TODO handle toric behaviour
 	
 	toggleParity();
-}
-
-std::size_t Grid::size() const
-{
-	return m_table.size();
 }
 
 void Grid::toggleState(std::size_t x, std::size_t y)
