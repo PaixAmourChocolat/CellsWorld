@@ -1,8 +1,9 @@
 #ifndef GRID_H
 #define GRID_H
 
-//#include "Rules.h"
+#include "Rule.h"
 #include <vector>
+#include <string>
 //#include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -12,7 +13,7 @@ class Grid // : public sf::Drawable
 	
 	public :
 		
-		enum State
+		enum Parity
 		{
 			Even,
 			Odd
@@ -23,20 +24,22 @@ class Grid // : public sf::Drawable
 		Grid(std::size_t);
 		Grid(std::initializer_list<bool>, std::size_t = 2);
 		
-		// void update();
+		void update();
 		std::size_t size() const;
 		
-	/*private :
+	private :
 		
-		virtual void draw(sf::RenderTarget&, sf::RenderStates) const;
+		// virtual void draw(sf::RenderTarget&, sf::RenderStates) const;
 		
-		void toggleState(int x, int y);
-	*/
+		void toggleState(std::size_t, std::size_t);
+		void toggleParity();
 		
 	private :
 		
 		const std::size_t m_size;
 		std::vector<std::vector<bool>> m_table;
+		Rule m_rule;
+		Parity m_parity;
 };
 
 std::ostream& operator<<(std::ostream&, const Grid&);
