@@ -95,17 +95,7 @@ void Grid::toggleParity()
 	m_parity = (m_parity == Even) ? Odd : Even;
 }
 
-std::ostream& operator<<(std::ostream& os, const Grid& grid)
+void Grid::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	for(std::size_t j = 0; j < grid.size(); ++j)
-	{
-		for(std::size_t i = 0; i < grid.size(); ++i)
-		{
-			os << (grid.m_table[i][j] ? std::string("x") : std::string(" "));
-			os << " ";
-		}
-		os << std::endl;
-	}
 	
-	return os;
 }

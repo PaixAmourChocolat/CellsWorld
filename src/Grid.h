@@ -4,13 +4,10 @@
 #include "Rule.h"
 #include <vector>
 #include <string>
-//#include <SFML/Graphics.hpp>
-#include <iostream>
+#include <SFML/Graphics.hpp>
 
-class Grid // : public sf::Drawable
+class Grid : public sf::Drawable
 {
-	friend std::ostream& operator<<(std::ostream&, const Grid&);
-	
 	public :
 		
 		enum Parity
@@ -36,10 +33,10 @@ class Grid // : public sf::Drawable
 		
 		void resize(std::size_t);
 		
-		// virtual void draw(sf::RenderTarget&, sf::RenderStates) const;
-		
 		void toggleState(std::size_t, std::size_t);
 		void toggleParity();
+		
+		void draw(sf::RenderTarget&, sf::RenderStates) const override;
 		
 	private :
 		
@@ -48,7 +45,5 @@ class Grid // : public sf::Drawable
 		Rule m_rule;
 		Parity m_parity;
 };
-
-std::ostream& operator<<(std::ostream&, const Grid&);
 
 #endif // GRID_H
