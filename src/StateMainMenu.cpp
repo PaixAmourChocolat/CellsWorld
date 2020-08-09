@@ -4,7 +4,7 @@
 StateMainMenu::StateMainMenu(StateManager* stateManager)
 : StateBase(stateManager)
 , m_grid(5)
-, m_updateTime(sf::seconds(0.1f))
+, m_updateTime(sf::seconds(0.05f))
 , m_elapsedTime(sf::Time::Zero)
 { }
 

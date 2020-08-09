@@ -121,6 +121,7 @@ void Grid::draw(sf::RenderTarget& target, sf::RenderStates states) const
 		}
 	}
 	
+	/*
 	sf::RectangleShape vert;
 	vert.setFillColor(sf::Color::Red);
 	vert.setSize({2.f, 640.f});
@@ -140,4 +141,5 @@ void Grid::draw(sf::RenderTarget& target, sf::RenderStates states) const
 		horiz.setPosition(0, j*640.f/m_size + 1.f);
 		target.draw(horiz, states);
 	}
+	*/
 }

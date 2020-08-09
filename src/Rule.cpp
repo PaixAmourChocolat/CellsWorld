@@ -1,4 +1,5 @@
 #include "Rule.h"
+#include <iostream>
 
 void Rule::operator()(LineQuad& input)
 {
@@ -22,11 +23,11 @@ void Rule::loadFromFile(const std::string& filename)
 	
 	std::string delimiter = ":";
 	
+	std::string line;
+	std::getline(file, line);
+	
 	while (!file.eof())
 	{
-		std::string line;
-		std::getline(file, line);
-		
 		std::size_t delimPos = line.find(delimiter);
 		std::string inputStr = line.substr(0, delimPos);
 		std::string outputStr = line.substr(delimPos + delimiter.size());
@@ -40,7 +41,9 @@ void Rule::loadFromFile(const std::string& filename)
 			{
 				input[i] = (inputStr[i] == '1');
 				output[i] = (outputStr[i] == '1');
+				std::cout << input[i] << " --> " << output[i] << std::endl;
 			}
+			std::cout << "------------" << std::endl;
 		}
 		catch (std::exception& err)
 		{
@@ -48,5 +51,6 @@ void Rule::loadFromFile(const std::string& filename)
 		}
 		
 		m_graph[input] = output;
+		std::getline(file, line);
 	}
 }
